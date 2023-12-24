@@ -1,0 +1,4 @@
+Sharan.py is the updated flask file
+session['username'] = request.form['username']
+session['gmail'] = request.form['gmail']
+session['password'] = request.form['password']

@@ -1,0 +1,29 @@
+{% extends "boiler.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %} 
+    {% if messages %}
+        {% for msg in messages %}
+            <script>
+                window.alert({{msg}})
+            </script>
+            {{msg}}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<h1>This is homepage</h1>
+
+<form method="POST" action='/homepage' enctype="multipart/form-data" >
+    <input type="file" name="file" accept="*" required>
+    <input type="submit" value="uploadFile">
+</form>
+
+<ul>
+    {% for files in userFileNames %}
+    <li>{{ files }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

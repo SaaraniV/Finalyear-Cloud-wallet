@@ -1,0 +1,703 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Dashboard </title>
+      
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     
+      <!-- <link rel="stylesheet" href="/static/css/Custom_style.css"/> -->
+      <style>
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body{
+  background: #dfe9f5;
+}
+.container{
+  display: flex;
+}
+nav{
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  left: 0;
+  background: #fff;
+  width: 280px;
+  overflow: hidden;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.logo{
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+.logo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.logo span{
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+a{
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: table;
+  width: 280px;
+  padding: 10px;
+}
+nav .fas{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center;
+}
+.nav-item{
+  position: relative;
+  top: 12px;
+  margin-left: 10px;
+}
+a:hover{
+  background: #eee;
+}
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+
+/* Main Section */
+.main{
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+.main-top{
+  display: flex;
+  width: 100%;
+}
+.main-top i{
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+.main-skills{
+  display: flex;
+  margin-top: 20px;
+}
+.main-skills .card{
+  width: 25%;
+  margin: 10px;
+  background: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.main-skills .card h3{
+  margin: 10px;
+  text-transform: capitalize;
+}
+.main-skills .card p{
+  font-size: 12px;
+}
+.main-skills .card button{
+  background: orangered;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.main-skills .card button:hover{
+  background: rgba(223, 70, 15, 0.856);
+}
+.main-skills .card i{
+  font-size: 22px;
+  padding: 10px;
+}
+
+/* Courses */
+.main-course{
+  margin-top:20px ;
+  text-transform: capitalize;
+}
+.course-box{
+  width: 100%;
+  height: 300px;
+  padding: 10px 10px 30px 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.course-box ul{
+  list-style: none;
+  display: flex;
+}
+.course-box ul li{
+  margin: 10px;
+  color: gray;
+  cursor: pointer;
+}
+.course-box ul .active{
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+.course-box .course{
+  display: flex;
+}
+.box{
+  width: 33%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  background: rgb(235, 233, 233);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.box p{
+  font-size: 12px;
+  margin-top: 5px;
+}
+.box button{
+  background: #000;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 10px;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+.box button:hover{
+  background: rgba(0, 0, 0, 0.842);
+}
+.box i{
+  font-size: 7rem;
+  float: right;
+  margin: -20px 20px 20px 0;
+}
+.html{
+  color: rgb(25, 94, 54);
+}
+.css{
+  color: rgb(104, 179, 35);
+}
+.js{
+  color: rgb(28, 98, 179);
+}
+  
+        body{
+          overflow: hidden;
+          font-size: small;
+        }
+            .dataForm{
+              display: flex;
+              flex-wrap: wrap;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-around;
+              height: 180px;
+              background-color: white;
+              border-radius: 10px;
+              border-color: #ccc;
+              border-width: 1px;
+              box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+              padding: 0 10px;
+              /* margin-bottom: 20px; */
+            }
+            .dataForm .csvDiv{
+              min-width: 300px;
+              flex:2;
+              margin: 0;
+              /* margin-bottom: 20px; */
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            .dataForm .filedroparea{
+                margin: 0;
+              border-radius: 10px;
+              border-color: #858585;
+              border-style: dashed;
+              border-width: 2px;
+              min-height: 130px;
+              min-width: 170px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 10px;
+            }
+            .dataForm .csvInputTag{
+              margin-top: 10px;
+              max-width: 200px;
+              /* margin-left: 40px; */
+            }
+            .dataForm .custom-select{
+              min-width: 100px;
+              max-width: 35px;
+              border-color: #ccc;
+              border-width: 1px;
+              border-style: solid;
+            }
+            .formcontainerflex{
+              flex:3;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: space-between;
+              align-items: center;
+              /* background-color: aqua; */
+              min-height: 160px;
+              min-width: 180px;
+              max-width: 600px;
+              margin: 0 ;
+            }
+            .formcontainerflex .custom-button{
+              /* margin: 0 60px; */
+              padding: 7px 15px;
+              background-color: orange;
+              border-radius: 7px;
+            }
+            .formcontainerflex .custom-button:hover{
+              background-color: rgba(255, 166, 0, 0.664);
+            }
+            .formcontainerflex .formelement{
+              margin-left: 40px;
+            }
+      </style>
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LHCGLN2DT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4LHCGLN2DT');
+</script>
+    <body>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="#" class="logo">
+              <img src="https://play-lh.googleusercontent.com/l7uw4DJ65-q_G9RBp3e5XPDAuRz5x6jP3hqUSpdUr-ZM2qpyoQdDBT1U6qztnxchhw" alt="">
+              <span class="nav-item">DashBoard</span>
+            </a></li>
+            <li><a href="{{url_for('dashboard')}}">
+              <span class="nav-item">Analytics</span>
+            </a></li>
+            <li><a href="{{url_for('custom_data')}}">
+              <span class="nav-item">Custom Datagraph</span>
+            </a></li>
+
+            <li><a href="">
+              <span class="nav-item">Notifications</span>
+            </a></li>
+            <li><a href="{{url_for('user_feed')}}">
+              <span class="nav-item">User Feedbacks</span>
+            </a></li>
+            <li><a href="{{url_for('user_alerts')}}">
+              <span class="nav-item">Recruiter recommendation</span>
+            </a></li>
+            <li><a href="{{url_for('todo')}}">
+              <span class="nav-item">To do</span>
+            </a></li>
+            <li><a href="{{url_for('system_update')}}">
+              <span class="nav-item">Traffic</span>
+            </a></li>
+            <li><a href="">
+              <span class="nav-item">Profile</span>
+            </a></li>
+            <li><a href="">
+              <span class="nav-item">Help</span>
+            </a></li>
+            <li><a href="{{url_for('logout')}}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Log out</span>
+            </a></li>
+          </ul>
+        </nav>
+    
+        <section class="main">
+          <form id="dataForm" class="dataForm">
+            <div class="csvDiv">
+                <div class="filedroparea">
+                    <label for="csvInput" >Upload CSV file:</label>
+                </div>
+                <input type="file" id="csvInput" accept=".csv" class="csvInputTag">
+
+            </div>
+            
+            
+            <!-- New input fields for custom axis titles -->
+            <div class="formcontainerflex">
+                <div class="formelement">
+                    <label for="xAxis">Select X-axis:</label>
+                    <select id="xAxis"></select>
+                    
+                    <label for="yAxis" style="margin-left: 130px;">Select Y-axis:</label>
+                    <select id="yAxis"></select>
+                </div>
+                <div class="formelement">
+
+                    <label for="xAxisTitle">X-axis Title:</label>
+                    <input type="text" id="xAxisTitle" placeholder="Enter X-axis title">
+                    
+                    <label for="yAxisTitle">Y-axis Title:</label>
+                    <input type="text" id="yAxisTitle" placeholder="Enter Y-axis title">
+                </div>
+                <div class="formelement">
+
+                    <label for="chartType">Select Chart Type:</label>
+                    <select id="chartType">
+                        <option value="line">Line Chart</option>
+                        <option value="column">Column Chart</option>
+                        <option value="pie">Pie Chart</option>
+                        <option value="scatter">Scatter Plot</option>
+                        <option value="area">Area Chart</option>
+                        <option value="combo">Combo Chart</option>
+                        <option value="candlestick">Candlestick Chart</option>
+                    </select>
+                    
+                    <label for="animation">Enable Animation:</label>
+                    <input type="checkbox" id="animation" checked>
+                </div>
+                <div class="formelement">
+
+                    
+                    <button type="button" onclick="drawChart()" class="custom-button">Create Chart</button>
+                    
+                    <!-- Button for dynamic data update -->
+                    <button type="button" onclick="updateChart()" class="custom-button" style="margin-left: 125px;">Update with New Data</button>
+                </div>
+            </div>
+          </form>
+        
+          <!-- Container for the Chart -->
+          <div id="chartContainer" style="width: 80%; height: 400px; margin-top: 20px;"></div>
+        
+          <script>
+            // Load the Google Charts library
+            google.charts.load('current', { 'packages': ['corechart'] });
+        
+            // Function to handle file input
+            document.getElementById('csvInput').addEventListener('change', handleFileSelect);
+        
+            // Function to read CSV file and populate column dropdowns
+            function handleFileSelect(event) {
+              var file = event.target.files[0];
+              if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  var csvData = e.target.result;
+                  populateColumnDropdowns(csvData);
+                };
+                reader.readAsText(file);
+              }
+            }
+        
+            // Function to populate X and Y axis dropdowns
+            function populateColumnDropdowns(csvData) {
+              var lines = csvData.split('\n');
+              var headers = lines[0].split(',');
+        
+              var xAxisDropdown = document.getElementById('xAxis');
+              var yAxisDropdown = document.getElementById('yAxis');
+        
+              // Clear previous options
+              xAxisDropdown.innerHTML = '';
+              yAxisDropdown.innerHTML = '';
+        
+              // Populate X axis dropdown with categorical columns
+              for (var i = 0; i < headers.length; i++) {
+                var option = document.createElement('option');
+                option.value = i;
+                option.text = headers[i];
+        
+                // Check if the column is categorical for the X axis
+                if (isCategoricalColumn(lines, i)) {
+                  xAxisDropdown.add(option);
+                }
+        
+                // Check if the column is numerical for the Y axis
+                if (isNumericalColumn(lines, i)) {
+                  yAxisDropdown.add(option.cloneNode(true));
+                }
+              }
+            }
+        
+            // Function to check if a column is numerical
+            function isNumericalColumn(lines, columnIndex) {
+              for (var i = 1; i < lines.length; i++) {
+                var values = lines[i].split(',');
+                var value = values[columnIndex].trim();
+                if (isNaN(parseFloat(value))) {
+                  return false;
+                }
+              }
+              return true;
+            }
+        
+            // Function to check if a column is categorical
+            function isCategoricalColumn(lines, columnIndex) {
+              for (var i = 1; i < lines.length; i++) {
+                var values = lines[i].split(',');
+                var value = values[columnIndex].trim();
+                if (!isNaN(parseFloat(value))) {
+                  return false;
+                }
+              }
+              return true;
+            }
+        
+            // Function to draw the chart
+            function drawChart() {
+              var xAxisIndex = document.getElementById('xAxis').value;
+              var yAxisIndex = document.getElementById('yAxis').value;
+              var chartType = document.getElementById('chartType').value;
+              var enableAnimation = document.getElementById('animation').checked;
+        
+              // Get user input data from the CSV file
+              var fileInput = document.getElementById('csvInput');
+              var file = fileInput.files[0];
+        
+              if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  var csvData = e.target.result;
+                  var dataArray = parseCSV(csvData);
+        
+                  // Get custom axis titles
+                  var xAxisTitle = document.getElementById('xAxisTitle').value || 'X-axis';
+                  var yAxisTitle = document.getElementById('yAxisTitle').value || 'Y-axis';
+        
+                  createChart(dataArray, xAxisIndex, yAxisIndex, chartType, enableAnimation, xAxisTitle, yAxisTitle);
+                };
+                reader.readAsText(file);
+              }
+            }
+        
+            // Function to parse CSV data
+            function parseCSV(csvData) {
+              var dataArray = [];
+              var lines = csvData.split('\n');
+              for (var i = 1; i < lines.length; i++) {
+                var values = lines[i].split(',');
+                dataArray.push(values);
+              }
+              return dataArray;
+            }
+        
+            // Function to create and draw the chart
+            function createChart(dataArray, xAxisIndex, yAxisIndex, chartType, enableAnimation, xAxisTitle, yAxisTitle) {
+              // Create a DataTable and add the data
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', xAxisTitle);
+              data.addColumn('number', yAxisTitle);
+        
+              var cumulativeData = new Map(); // Map to store cumulative counts
+        
+              for (var i = 0; i < dataArray.length; i++) {
+                var xValue = dataArray[i][xAxisIndex];
+                var yValue = parseFloat(dataArray[i][yAxisIndex]);
+        
+                if (!cumulativeData.has(xValue)) {
+                  cumulativeData.set(xValue, 0);
+                }
+        
+                cumulativeData.set(xValue, cumulativeData.get(xValue) + yValue);
+              }
+        
+              cumulativeData.forEach((cumulativeCount, xValue) => {
+                data.addRow([xValue, cumulativeCount]);
+              });
+        
+              // Set chart options
+              var options = {
+                title: 'Chart',
+                hAxis: { title: xAxisTitle, slantedText: true, slantedTextAngle: 45 },
+                vAxis: { title: yAxisTitle },
+                animation: { duration: 1000, easing: 'out', startup: enableAnimation },
+              };
+        
+              // Customize options based on the chart type
+              customizeOptions(chartType, options);
+        
+              // Create and draw the selected chart
+              var chart;
+              switch (chartType) {
+                case 'line':
+                  chart = new google.visualization.LineChart(document.getElementById('chartContainer'));
+                  options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' };
+                  break;
+                case 'column':
+                  chart = new google.visualization.ColumnChart(document.getElementById('chartContainer'));
+                  break;
+                case 'pie':
+                  chart = new google.visualization.PieChart(document.getElementById('chartContainer'));
+                  break;
+                case 'scatter':
+                  chart = new google.visualization.ScatterChart(document.getElementById('chartContainer'));
+                  options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'both' };
+                  break;
+                case 'area':
+                  chart = new google.visualization.AreaChart(document.getElementById('chartContainer'));
+                  options.isStacked = true;
+                  break;
+                case 'combo':
+                  chart = new google.visualization.ComboChart(document.getElementById('chartContainer'));
+                  options.seriesType = 'bars';
+                  options.series = { 1: { type: 'line' } };
+                  break;
+                case 'candlestick':
+                  chart = new google.visualization.CandlestickChart(document.getElementById('chartContainer'));
+                  options.legend = 'none';
+                  options.bar = { groupWidth: '100%' };
+                  break;
+                default:
+                  console.error('Invalid chart type selected');
+                  return;
+              }
+        
+              // Set up event listeners for interactivity
+              setChartEventListeners(chart);
+        
+              chart.draw(data, options);
+            }
+        
+            // Function to customize chart options based on the chart type
+            function customizeOptions(chartType, options) {
+              switch (chartType) {
+                case 'pie':
+                  options.is3D = true;
+                  break;
+                case 'scatter':
+                  options.pointSize = 10;
+                  break;
+                case 'area':
+                  options.isStacked = true;
+                  break;
+                case 'combo':
+                  options.seriesType = 'bars';
+                  options.series = { 1: { type: 'line' } };
+                  break;
+                case 'candlestick':
+                  options.legend = 'none';
+                  options.bar = { groupWidth: '100%' };
+                  break;
+                default:
+                  // No additional customization for other chart types
+                  break;
+              }
+            }
+        
+            // Function to set up event listeners for interactivity
+            function setChartEventListeners(chart) {
+              google.visualization.events.addListener(chart, 'select', function() {
+                var selection = chart.getSelection();
+                if (selection.length > 0) {
+                  var item = selection[0];
+                  console.log('Selected item:', item);
+                }
+              });
+            }
+        
+            // Function to update the chart with new random data
+            function updateChart() {
+              var xAxisIndex = document.getElementById('xAxis').value;
+              var yAxisIndex = document.getElementById('yAxis').value;
+              var chartType = document.getElementById('chartType').value;
+              var enableAnimation = document.getElementById('animation').checked;
+        
+              // Generate random data
+              var newData = [];
+              for (var i = 0; i < 10; i++) {
+                var randomX = 'X' + i;
+                var randomY = Math.random() * 100;
+                newData.push([randomX, randomY]);
+              }
+        
+              // Create a DataTable and add the new data
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'X');
+              data.addColumn('number', 'Y');
+        
+              for (var i = 0; i < newData.length; i++) {
+                data.addRow([newData[i][xAxisIndex], newData[i][yAxisIndex]]);
+              }
+        
+              // Set chart options
+              var options = {
+                title: 'Updated Chart with Random Data',
+                hAxis: { title: 'X-axis', slantedText: true, slantedTextAngle: 45 },
+                vAxis: { title: 'Y-axis' },
+                animation: { duration: 1000, easing: 'out', startup: enableAnimation },
+              };
+        
+              // Customize options based on the chart type
+              customizeOptions(chartType, options);
+        
+              // Create and draw the selected chart
+              var chart;
+              switch (chartType) {
+                case 'line':
+                  chart = new google.visualization.LineChart(document.getElementById('chartContainer'));
+                  options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' };
+                  break;
+                case 'column':
+                  chart = new google.visualization.ColumnChart(document.getElementById('chartContainer'));
+                  break;
+                case 'pie':
+                  chart = new google.visualization.PieChart(document.getElementById('chartContainer'));
+                  break;
+                case 'scatter':
+                  chart = new google.visualization.ScatterChart(document.getElementById('chartContainer'));
+                  options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'both' };
+                  break;
+                case 'area':
+                  chart = new google.visualization.AreaChart(document.getElementById('chartContainer'));
+                  options.isStacked = true;
+                  break;
+                case 'combo':
+                  chart = new google.visualization.ComboChart(document.getElementById('chartContainer'));
+                  options.seriesType = 'bars';
+                  options.series = { 1: { type: 'line' } };
+                  break;
+                case 'candlestick':
+                  chart = new google.visualization.CandlestickChart(document.getElementById('chartContainer'));
+                  options.legend = 'none';
+                  options.bar = { groupWidth: '100%' };
+                  break;
+                default:
+                  console.error('Invalid chart type selected');
+                  return;
+              }
+        
+              // Set up event listeners for interactivity
+              setChartEventListeners(chart);
+        
+              chart.draw(data, options);
+            }
+          </script>
+          
+        </section>
+      </div>
+    </body>
+    </html></span>

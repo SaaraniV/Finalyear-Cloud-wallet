@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    
+    <body>
+        <br>
+        <hr>
+        Header block
+        <form action='/signout' method = 'POST'>
+            <input type="submit" value="signout" name="signout">
+        </form> 
+        <hr>
+        <br>
+        {% block content %}
+    
+        {% endblock %}
+        <br>
+        <br>
+        <hr>
+        Footer block 
+        <hr>
+    </body>
+</html>

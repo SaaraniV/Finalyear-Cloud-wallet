@@ -1,0 +1,17 @@
+
+{% with messages = get_flashed_messages() %} 
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<form action="/create_account">
+    <input type="submit" value="create_account">
+</form> 
+
+<form action="/login">
+    <input type="submit" value="logIn">
+</form> 
+  
+
