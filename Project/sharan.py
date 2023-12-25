@@ -1,4 +1,4 @@
-from flask import Flask , render_template , request , redirect , url_for , session , flash
+from app import Flask , render_template , request , redirect , url_for , session , flash
 # import pymongo
 import os
 from pymongo import MongoClient

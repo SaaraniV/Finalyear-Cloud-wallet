@@ -20,10 +20,30 @@
     <input type="submit" value="uploadFile">
 </form>
 
-<ul>
-    {% for files in userFileNames %}
-    <li>{{ files }}</li>
-    {% endfor %}
-</ul>
+<table>
+    
+        {% for files in userFileNames %}
+<ol>
+    <tr>
+      <td> <li> {{ files }} </li> </td>
+      <td> <button> <a href="" > preview </a> </button> </td>
+      <td> <button type="button" id = {{ files }} onclick="sendButtonId()" > remove </button> </td>
+    </tr>
+</ol>
+        {% endfor %}
+        <script>
+            function sendButtonId() {
+                var buttonId = document.getElementById('myButton').id;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/process_button?button_id=' + buttonId, true);
+    
+                
+                xhr.send();
+            }
+        </script>
+    
+  </table>
+
+  <button> <a href="{{url_for('statichosting')}}" > Static hosting page </a> </button>
 
 {% endblock content %}

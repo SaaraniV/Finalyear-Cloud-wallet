@@ -1,4 +1,4 @@
-from flask import Flask , render_template , request , redirect , url_for , session , flash
+from app import Flask , render_template , request , redirect , url_for , session , flash
 # import pymongo
 import os
 from pymongo import MongoClient
@@ -31,16 +31,16 @@ def getingFileNames():
     fileArray = user['fileNames']
     return fileArray
 
+def gettingStaticFileNames():
+    user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+    staticFileArray = user['staticFileNames']
+    return staticFileArray
+
 # routing !!!
 
 @app.route("/")
 def indexPage():
-    if "username" in session:
-        flash("Session not expired")
-        # userFileNames
-        return render_template('homepage.html',userFileNames = getingFileNames())
-    else:
-        return render_template("indexPage.html")
+    return render_template("indexPage.html")
 
 @app.route("/create_account",methods=['POST','GET'])
 def create_account():
@@ -53,7 +53,8 @@ def create_account():
                 "username":request.form['username'],
                 "gmail":request.form['gmail'],
                 "password":request.form['password'],
-                "fileNames":[]
+                "fileNames":[],
+                "staticFileNames":[]
             }
             insertdata(data)
             print(request.form['username'] + "data inserted to database")
@@ -107,17 +108,96 @@ def homepage():
                 user1 = collection.find_one({"username": session['username'], "password": session['password']})
                 fileArray = user1['fileNames']
                 temp = session['username']+"-"+file.filename
-                fileArray.append(temp)
-                collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": fileArray}})
-                flash("file added to your account!!")
-                # AWS code to send to send file to s3
-                # while adding to s3 add username before it <temp>
-                os.remove('./uploads/'+file.filename)
-                return render_template("homepage.html",userFileNames = fileArray)
-        return render_template("homepage.html")
+                if temp not in fileArray: 
+                    fileArray.append(temp)
+                    collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": fileArray}})
+                    flash("file added to your account!!")
+                    # AWS code to send to send file to s3
+                    # while adding to s3 add username before it <temp>
+                    os.remove('./uploads/'+file.filename)
+                    # request.method = 'GET'
+                    return render_template("homepage.html",userFileNames = fileArray)
+                else:
+                    flash("File already exists!!")
+                    return render_template("homepage.html",userFileNames = fileArray)
+        user1 = collection.find_one({"username": session['username'], "password": session['password']})
+        fileArray = user1['fileNames']
+        return render_template("homepage.html",userFileNames = fileArray)
     flash("You have been logged out , LogIn again !")
     # prompt that user is out of session
     return redirect(url_for('indexPage'))
+
+# @app.route('/button-click', methods=['POST','GET'])
+# def handle_button_click():
+#     data = request.json  # Get the JSON data from the request
+#     button_id = data.get('id')  
+#     print(f"Button with ID {button_id} was clicked")
+#     user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+#     tempArray = user['fileNames']
+#     tempArray.remove(button_id)
+#     # request.method = 'GET'
+#     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": tempArray}})
+#     return redirect(url_for("homepage.html",userFileNames = tempArray))
+
+@app.route('/process_button', methods=['GET'])
+def process_button():
+    button_id = request.args.get('button_id')
+    
+    # Process the button_id as needed
+    print(f"Button ID received: {button_id}")
+
+    # You can send a response back to the client if needed
+
+    return "Button ID received successfully"
+
+@app.route("/statichosting",methods=['POST','GET'])
+def statichosting():
+    if "username" in session:
+        if request.method == 'POST':
+            if 'staticFile' not in request.files:
+                return 'No file part'
+
+            file = request.files['staticFile']
+
+            if file.filename == '':
+                return 'No selected file'
+
+            if file:
+                destination_folder = './staticUploads'
+                if not os.path.exists(destination_folder):
+                    os.makedirs(destination_folder)
+                file = request.files['staticFile']
+                filename = os.path.join(destination_folder,file.filename)
+                file.save(filename)
+                print("file saved: "+file.filename)
+                #add file name to mongo
+                user1 = collection.find_one({"username": session['username'], "password": session['password']})
+                staticFileArray = user1['staticFileNames']
+                temp = session['username']+"-"+file.filename
+                staticFileArray.append(temp)
+                collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"staticFileNames": staticFileArray}})
+                flash("file added to your account!!")
+                # AWS code to send to send static file to s3
+                # while adding to s3 add username before it <temp>
+                os.remove('./staticUploads/'+file.filename)
+                return render_template("statichosting.html",staticFileNames = staticFileArray)
+        return render_template("statichosting.html")
+    flash("You have been logged out , LogIn again !")
+    # prompt that user is out of session
+    return redirect(url_for('indexPage'))
+
+@app.route('/staticbutton-click', methods=['POST','GET'])
+def handle_staticbutton_click():
+    data = request.json  # Get the JSON data from the request
+    button_id = data.get('id')  
+    print(f"Button with ID {button_id} was clicked")
+    user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+    tempArray = user['staticFileNames']
+    tempArray.remove(button_id)
+    # request.method = 'GET'
+    collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"staticFileNames": tempArray}})
+    return redirect(url_for("statichosting.html",userFileNames = tempArray))
+
 
 @app.route("/signout",methods=['POST','GET'])
 def signout():
@@ -128,11 +208,6 @@ def signout():
         session.pop('password',None)
         return redirect(url_for('indexPage'))
     return redirect(url_for('indexPage'))
-
-
-# @app.route("/statichosting")
-# def staticwebpage():
-#     return render_template("statichosting.html")
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=8080,debug=True)
