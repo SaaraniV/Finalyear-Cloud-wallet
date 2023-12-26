@@ -19,7 +19,7 @@ def index():
 
 @app.route('/create_account',methods=['POST','GET'])
 def create_account():
-    if request.method == 'POST':
+    if request.method == 'POST': 
         data = {
             "username":request.form['username'],
             "gmail":request.form['gmail'],
@@ -27,8 +27,13 @@ def create_account():
             "fileNames":[],
             "staticFileNames":[]
         }
+        user = collection.find_one({"username":data['username']})
+        if user:
+            flash("Account already exists")
+            return render_template('login.html')
         collection.insert_one(data)
         print(request.form['username'] + "data inserted to database")
+        flash("Account is created!!")
         # alert message kudakanum that account is created nu 
         return render_template('login.html')
     return render_template('create_account.html')
@@ -93,10 +98,52 @@ def addYourFiles():
             return redirect(url_for('home'))
     return render_template('addYourFiles.html')
 
+@app.route('/remove/<button_id>')
+def remove(button_id):
+    user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+    tempArray = user['fileNames']
+    # data = request.get_json()
+    # button_id = data.get('button_id')
+    print(f"Received button ID: {button_id}")
+    print(tempArray)
+    tempArray.remove(button_id)
+    print(tempArray)
+    collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": tempArray}})
+    print("inside")
+    return redirect(url_for('home'))
+    # return redirect(url_for('home'))
+
 @app.route("/removeYourFiles",methods=['POST','GET'])
 def removeYourFiles():
-    
-    return render_template('removeYourFiles.html')
+    user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+    tempArray = user['fileNames']
+    # if request.method == 'POST':
+    #     data = request.get_json()
+    #     button_id = data.get('buttonId')
+    #     print(f"Received button ID: {button_id}")
+    #     print(tempArray)
+    #     tempArray.remove(button_id)
+    #     print(tempArray)
+    #     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": tempArray}})
+    #     print("not returning")
+    #     return redirect(url_for('home'))
+    return render_template('removeYourFiles.html',files=tempArray)
+
+@app.route('/removeStatic/<button_id>')
+def removeStatic(button_id):
+    user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+    tempArray = user['staticFileNames']
+    # data = request.get_json()
+    # button_id = data.get('button_id')
+    print(f"Received button ID: {button_id}")
+    print(tempArray)
+    tempArray.remove(button_id)
+    print(tempArray)
+    collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"staticFileNames": tempArray}})
+    print("inside")
+    return redirect(url_for('home'))
+    # print("outside")
+    # return redirect(url_for('home'))
 
 @app.route("/addStaticFiles",methods=['POST','GET'])
 def addStaticFiles():
@@ -138,7 +185,20 @@ def addStaticFiles():
 
 @app.route("/removeStaticFiles",methods=['POST','GET'])
 def removeStaticFiles():
-    return render_template('removeStaticFiles.html')
+    user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
+    tempArray = user['staticFileNames']
+    # if request.method == 'POST':
+    #     data = request.get_json()
+    #     button_id = data.get('buttonId')
+    #     print(f"Received button ID: {button_id}")
+    #     print(tempArray)
+    #     tempArray.remove(button_id)
+    #     print(tempArray)
+    #     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": tempArray}})
+    #     print("not returning")
+    #     return redirect(url_for('home'))
+    return render_template('removeStaticFiles.html',files=tempArray)
+
 
 @app.route("/signout",methods=['POST','GET'])
 def signout():
@@ -156,5 +216,3 @@ if __name__=="__main__":
     app.run(host='0.0.0.0',port=8080,debug=True)
 
     # sessions proper ah implement pannanum 
-    # already existing name la irukara account create agakudathu
-    # remove files pannanum 

@@ -1,4 +1,24 @@
 {% extends "boiler.html" %}
 
 {% block content %}
+
+<table>
+    
+    {% for data in staticFiles %}
+<tr>
+  <td>  {{ data }}  </td>
+  <td> <button> <a href="" > preview </a> </button> </td>
+  <td> <button id= {{ data }} onclick="sendButtonInfo(this.id)">Remove</button> </td>
+</tr>
+    {% endfor %}
+</table>
+
+<script>
+    function sendButtonInfo(btnId) {
+        console.log(btnId)
+        window.location.href = "/remove/"+btnId;
+    }
+</script>
+
+
 {% endblock content %}
