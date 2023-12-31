@@ -1,46 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Image Download</title>
-  <style>
-    /* Some basic styling */
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #3498db;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-  </style>
+  <title>Copy Link to Clipboard</title>
 </head>
 <body>
-  <button id="downloadButton">Download Image</button>
+  <button onclick="copyLink()">Copy</button>
 
   <script>
-    document.getElementById('downloadButton').addEventListener('click', function() {
-      var imageUrl = 'https://cdn.pixabay.com/photo/2023/12/15/14/49/city-8450817_1280.jpg'; // Replace with your image URL
-
-      fetch(imageUrl)
-        .then(response => response.blob())
-        .then(blob => {
-          // Creating an anchor element
-          var link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = 'downloaded-image.jpg'; // Name for the downloaded file
-          link.click(); // Simulating a click to trigger the download
+    function copyLink() {
+      const linkToCopy = 'https://www.google.com';
+      navigator.clipboard.writeText(linkToCopy)
+        .then(() => {
+          alert('Link copied to clipboard: ' + linkToCopy);
+        })
+        .catch(err => {
+          console.error('Unable to copy: ', err);
         });
-    });
+    }
   </script>
 </body>
 </html>

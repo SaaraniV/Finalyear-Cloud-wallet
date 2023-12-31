@@ -31,6 +31,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(7.4px);
 -webkit-backdrop-filter: blur(7.4px);
 }
+
 .formCont{
     display: flex;
     align-items: center;
@@ -38,6 +39,7 @@ backdrop-filter: blur(7.4px);
     flex-direction: column;
     gap: 50px;
 }
+
 .formCont .fileInput{
     border-radius: 10px;
     border-style: dashed;
@@ -54,4 +56,16 @@ backdrop-filter: blur(7.4px);
 .formCont input{
     background-color: white;
     color: black;
+}
+
+.leftCont{
+    width:50%;
+    
+}
+
+.leftCont p{
+    font-size:medium;
+    text-align: justify;
+    hyphens: auto;
+    line-height: 1.75;
 }

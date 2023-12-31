@@ -8,14 +8,15 @@
 <div class="container">
   <div class="leftCont">
 
-    <h1>Here are your files</h1>
+    <h1>Your Files</h1>
     
     <table>
       
       {% for data in files %}
       <tr>
         <td class="td1">  {{data.replace(username, '', 1)}}  </td>
-        <td class="td2"> <button class="previewButton"> <a href="" > preview </a> </button> </td>
+        <td class="td2"> <button class="previewButton"> <a href="https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg" > preview </a> </button> </td>
+        <td class="td2"> <button id="downloadButton" class="previewButton" >Download Image</button> </td>
       </tr>
       {% endfor %}
     </table>
@@ -24,16 +25,50 @@
   <div class="rightCont">
 
     
-    <h1>Here are static files</h1>
+    <h1>Hosted Files</h1>
     <table>
       
       {% for staticData in staticFiles %}
       <tr>
         <td class="td1"> {{staticData.replace(username, '', 1)}}  </td>
-        <td class="td2"> <button class="previewButton"> <a href=""> preview </a> </button> </td>
+        <td class="td2"> <button class="previewButton" onclick="copyLink()">Copy Hosted URL</button></td>
+        <td class="td2"> <button class="previewButton"> <a href="https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg"> preview </a> </button> </td>
+        <td class="td2"> <button id="downloadButton2" class="previewButton" >Download Image</button> </td>
       </tr>
       {% endfor %}
     </table>
+
+    <script>
+      document.getElementById('downloadButton').addEventListener('click', function() {
+        var imageUrl = 'https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg'; // Replace with your image URL
+  
+        fetch(imageUrl)
+          .then(response => response.blob())
+          .then(blob => {
+            // Creating an anchor element
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'downloaded-image.jpg'; // Name for the downloaded file
+            link.click(); // Simulating a click to trigger the download
+          });
+      });
+
+      document.getElementById('downloadButton2').addEventListener('click', function() {
+        var imageUrl = 'https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg'; // Replace with your image URL
+  
+        fetch(imageUrl)
+          .then(response => response.blob())
+          .then(blob => {
+            // Creating an anchor element
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'downloaded-image.jpg'; // Name for the downloaded file
+            link.click(); // Simulating a click to trigger the download
+          });
+      });
+    </script>
+
+    
   </div>
     
 </div>

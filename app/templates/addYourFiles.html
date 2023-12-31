@@ -8,12 +8,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <div class="container">
 
+    <div class="leftCont">
     <h1>Add your files here</h1>
-    
+    <p>
+        Thank you for using Cloud Wallet for your file storage needs. To ensure optimal compatibility and ease of access, kindly avoid including spaces in your file names during the upload process. Using underscores (_) or hyphens (-) instead of spaces will help maintain file integrity and facilitate seamless file management within Cloud Wallet.
+
+        Should you have any queries or require assistance, please don't hesitate to contact our support team.
+
+        Thank you for choosing Cloud Wallet.
+    </p>
+    </div>
     <form method="POST" action='/addYourFiles' enctype="multipart/form-data" class="formCont">
         <input type="file" name="file" accept="*" required class="fileInput">
         <input type="submit" value="uploadFile">
     </form>
+
+
     
 </div>
 {% endblock content %}
