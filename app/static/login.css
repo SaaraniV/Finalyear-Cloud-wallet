@@ -1,0 +1,58 @@
+body{
+    background: url('/static/bgimg2.jpg') center/cover no-repeat fixed;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+.blurDiv{
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.4px);
+    -webkit-backdrop-filter: blur(6.4px);
+    
+    width: 90vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 300px;
+}
+.mainDiv{
+    border-radius: 10px;
+    padding: 0 30px 20px 30px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.mainDiv input{
+    width: 100%;
+    border-style: none;
+    border-radius: 5px;
+    padding: 7px 5px;
+    font-weight: lighter;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.705);
+    background-color: rgba(255, 255, 255, 0.281);
+}
+.mainDiv input:focus {
+    /* Add the styles you want for the focused state here */
+
+    outline: none; /* This removes the default focus outline, use it carefully for accessibility */
+}
+h1{
+    font-size: 400%;
+    font-weight:600;
+    margin: 4px 0;
+}
+p{
+    font-weight: 300;
+
+}

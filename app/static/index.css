@@ -1,0 +1,93 @@
+body{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: black; */
+    /* background-image: radial-gradient( circle 815px at 23.4% -21.8%,  rgba(9,29,85,1) 0.2%, rgba(0,0,0,1) 100.2% ); */
+    background-image: radial-gradient( circle 815px at 23.4% -21.8%,  rgba(9,29,85,1) 0.2%, rgba(0,0,0,1) 100.2% );
+    /* background-image: linear-gradient(to right top, #28156f, #28217a, #272c86, #253691, #23419c, #2b4da6, #3359b0, #3c65ba, #4f75c6, #6186d1, #7497dc, #86a8e7); */
+}
+.indexDiv{
+    height: 370px;
+    width: 100vw;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:24px;
+}
+@keyframes customAnimation {
+    0% {   
+    }
+    100% {
+        opacity: 1;
+        font-size: 110%;
+        background-color: rgba(255, 255, 255, 0.096);
+    }
+}
+@keyframes customAnimation2 {
+    0% {   
+    }
+    100% {
+        opacity: 0.2;
+        font-size: 90%;
+        background-color: rgba(255, 255, 255, 0);
+    }
+}
+.indexDiv:hover > a{
+    /* opacity: 0.2;
+    font-size: 90%; */
+    animation: customAnimation2 0.5s ease 0s 1 normal forwards;
+}
+.indexDiv:hover > a:hover{
+    /* opacity: 1; */
+    /* background-color: rgba(255, 255, 255, 0.144); */
+    /* font-size: 110%; */
+    animation: customAnimation 0.5s ease 0s 1 normal forwards;
+
+}
+
+a{
+    flex: 1;
+    height: 350px;
+    border-radius: 10px;
+    background-color: rgba(131, 131, 131, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.5s ease, font-size 0.5s ease, background-color 0.5s ease;
+}
+
+.indexDiv > a:not(:hover) {
+    animation: endAnim1 0.5s ease 0s 1 normal forwards;
+}
+
+@keyframes endAnim1{
+    0%{
+    }
+    100%{
+        opacity: 0.3;
+    font-size: 90%;
+    background-color: rgba(255, 255, 255, 0);
+    }
+}
+button{
+    background-color: rgba(255, 255, 255, 0);
+    border-style: none;
+    font-size:400%;
+    color: white;
+}
+p{
+    background-color: rgba(255, 255, 255, 0);
+    border-style: none;
+    font-size:200%;
+    color: white;
+    position: absolute;
+    top: 5;
+    
+}

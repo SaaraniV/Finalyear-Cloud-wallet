@@ -1,0 +1,28 @@
+{% extends "boiler.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/removeStaticFiles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<div class="container">
+    <table >
+        {% for data in files %}
+        <tr>
+            <td class="td1">  {{data.replace(username, '', 1)}}  </td>
+            <td class="td2"> <button class="previewButton"> <a href="" > preview </a> </button> </td>
+            <td class="td2"> <button id= {{ data }} onclick="sendButtonInfo(this.id)" class="previewButton2">Remove</button> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<script>
+    function sendButtonInfo(btnId) {
+        console.log(btnId)
+        window.location.href = "/removeStatic/"+btnId;
+    }
+</script>
+
+
+{% endblock content %}

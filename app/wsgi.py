@@ -15,10 +15,16 @@ collection = db['users-collection']
 
 @app.route('/')
 def index():
+    if 'username' in session:
+        flash("Welcome back!!")
+        return redirect(url_for('home'))
     return render_template('index.html')
 
 @app.route('/create_account',methods=['POST','GET'])
 def create_account():
+    if 'username' in session:
+        flash("Welcome back!!")
+        return redirect(url_for('home'))
     if request.method == 'POST': 
         data = {
             "username":request.form['username'],
@@ -29,7 +35,7 @@ def create_account():
         }
         user = collection.find_one({"username":data['username']})
         if user:
-            flash("Account already exists")
+            flash("Account already exists!")
             return render_template('login.html')
         collection.insert_one(data)
         print(request.form['username'] + "data inserted to database")
@@ -40,6 +46,9 @@ def create_account():
 
 @app.route("/login",methods=['POST','GET'])
 def login():
+    if 'username' in session:
+        flash("Welcome back!!")
+        return redirect(url_for('home'))
     if request.method == 'POST':
         session['username'] = request.form['username']
         session['gmail'] = request.form['gmail']
@@ -58,7 +67,8 @@ def home():
     user = collection.find_one({"username":session['username'] ,"gmail":session['gmail'] , "password":session['password']})
     yourFilesArray = user['fileNames']
     staticFilesArray = user['staticFileNames']
-    return render_template('home.html', files=yourFilesArray , staticFiles=staticFilesArray )
+    username=session['username']+'-'
+    return render_template('home.html', files=yourFilesArray , staticFiles=staticFilesArray , username=username)
 
 @app.route("/addYourFiles",methods=['POST','GET'])
 def addYourFiles():
@@ -127,7 +137,8 @@ def removeYourFiles():
     #     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": tempArray}})
     #     print("not returning")
     #     return redirect(url_for('home'))
-    return render_template('removeYourFiles.html',files=tempArray)
+    username=session['username']+'-'
+    return render_template('removeYourFiles.html',files=tempArray,username=username)
 
 @app.route('/removeStatic/<button_id>')
 def removeStatic(button_id):
@@ -197,7 +208,8 @@ def removeStaticFiles():
     #     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": tempArray}})
     #     print("not returning")
     #     return redirect(url_for('home'))
-    return render_template('removeStaticFiles.html',files=tempArray)
+    username=session['username']+'-'
+    return render_template('removeStaticFiles.html',files=tempArray,username=username)
 
 
 @app.route("/signout",methods=['POST','GET'])
@@ -213,6 +225,7 @@ def signout():
     
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0',port=8080,debug=True)
+    app.run(debug=True)
 
-    # sessions proper ah implement pannanum 
+    # add aws code 
+    # when displaying code to frontend remove username from it

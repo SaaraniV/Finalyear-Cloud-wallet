@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/boiler.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div class="containerHeader">
+            <div class="leftHeader">
+                <p>CLOUD WALLET</p>
+                
+                <a href="/addYourFiles" style="margin-left: 20px;">   <button>Add Your Files</button>           </a>
+                
+                <a href="/removeYourFiles">   <button>Remove Your Files</button>     </a>
+                
+                <a href="/addStaticFiles">   <button>Add Static Files</button>       </a>
+                
+                <a href="/removeStaticFiles">   <button>Remove Static Files</button> </a>
+            </div>
+            <div class="rightHeader">
+                <form action='/signout' method = 'POST'>
+                    <input type="submit" value="SignOut" name="signout">
+                </form> 
+            </div>    
+            
+        </div>
+            <br>
+            {% block content %}
+            
+            {% endblock %}
+            <br>
+            <br>
+            
+    </body>
+</html>

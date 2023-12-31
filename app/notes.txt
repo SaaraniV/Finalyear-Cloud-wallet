@@ -7,3 +7,5 @@ session['password'] = request.form['password']
 
 {% block content %}
 {% endblock content %}
+
+{{data.replace(username, '', 1)}}

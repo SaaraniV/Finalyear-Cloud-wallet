@@ -1,0 +1,17 @@
+{% extends "boiler.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/static/addStaticFiles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<div class="container">
+
+    <h1>Add static files here</h1>
+    <form method="POST" action='/addStaticFiles' enctype="multipart/form-data" class="formCont">
+        <input type="file" name="file" accept="*" required class="fileInput">
+        <input type="submit" value="uploadFile">
+    </form>
+</div>
+{% endblock content %}

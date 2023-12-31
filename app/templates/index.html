@@ -1,0 +1,16 @@
+
+{% with messages = get_flashed_messages() %} 
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<link rel="stylesheet" href="static/index.css">
+<div class="indexDiv">
+    <a href="/create_account"><button>Create Account</button></a>
+    
+    <a href="/login"><button>Login</button></a>
+</div>
+
+
