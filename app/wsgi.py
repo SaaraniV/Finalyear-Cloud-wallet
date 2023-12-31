@@ -106,7 +106,8 @@ def addYourFiles():
                     flash("File already exists!!")
                     return redirect(url_for('home'))
             return redirect(url_for('home'))
-    return render_template('addYourFiles.html')
+    username = session['username']
+    return render_template('addYourFiles.html',username=username)
 
 @app.route('/remove/<button_id>')
 def remove(button_id):
@@ -192,7 +193,8 @@ def addStaticFiles():
                     flash("File already exists!!")
                     return redirect(url_for('home'))
             return redirect(url_for('home'))
-    return render_template('addStaticFiles.html')
+    username = session['username']
+    return render_template('addStaticFiles.html',username=username)
 
 @app.route("/removeStaticFiles",methods=['POST','GET'])
 def removeStaticFiles():

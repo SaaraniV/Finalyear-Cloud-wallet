@@ -55,3 +55,15 @@ backdrop-filter: blur(7.4px);
     background-color: white;
     color: black;
 }
+
+.leftCont{
+    width:50%;
+    
+}
+
+.leftCont p{
+    font-size:medium;
+    text-align: justify;
+    hyphens: auto;
+    line-height: 1.75;
+}

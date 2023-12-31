@@ -8,7 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <div class="container">
 
+    <div class="leftCont">
     <h1>Add static files here</h1>
+    <p>
+
+        "To ensure optimal hosting performance within Cloud Wallet, we highly recommend avoiding spaces in the filenames of uploaded HTML files. Additionally, for successful and reliable hosting, it is advisable to maintain a static structure in your HTML files, excluding any dynamic elements. Our dedicated support team is available round the clock to provide any necessary assistance or clarification. We appreciate your choice in selecting Cloud Wallet for your file storage needs. Thank you for being a part of the Cloud Wallet family!"
+
+    </p>
+    </div>
     <form method="POST" action='/addStaticFiles' enctype="multipart/form-data" class="formCont">
         <input type="file" name="file" accept="*" required class="fileInput">
         <input type="submit" value="uploadFile">
