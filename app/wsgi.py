@@ -2,7 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 # import pymongo
 import os
 from pymongo import MongoClient
+import boto3
 
+CLOUD_WALLET = "cloud-wallet"
+STATIC_CLOUD_WALLET = "static-cloud-wallet"
+
+s3 = boto3.client("s3")
 
 app = Flask(__name__)
 
@@ -98,6 +103,10 @@ def addYourFiles():
                     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"fileNames": fileArray}})
                     flash("file added to your account!!")
                     # AWS code to send to send file to s3
+                    #upload to cloud-wallet
+                    with open("./uploads/"+file.filename, "rb") as f:
+                        s3.upload_fileobj(f, CLOUD_WALLET, ""+temp)
+                    print(temp+" added to cloud-wallet")
                     # while adding to s3 add username before it <temp>
                     os.remove('./uploads/'+file.filename)
                     # request.method = 'GET'
@@ -185,7 +194,11 @@ def addStaticFiles():
                     collection.update_one({"username": session['username'], "password": session['password']},{"$set": {"staticFileNames": fileArray}})
                     flash("file added to your account!!")
                     # AWS code to send to send file to s3
+                    #upload to static-cloud-wallet
+                    with open("./staticUploads/"+file.filename, "rb") as f:
+                        s3.upload_fileobj(f, STATIC_CLOUD_WALLET,""+temp)
                     # while adding to s3 add username before it <temp>
+                    print(temp+"added to static-cloud-wallet")
                     os.remove('./staticUploads/'+file.filename)
                     # request.method = 'GET'
                     return redirect(url_for('home'))

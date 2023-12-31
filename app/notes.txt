@@ -9,3 +9,5 @@ session['password'] = request.form['password']
 {% endblock content %}
 
 {{data.replace(username, '', 1)}}
+
+

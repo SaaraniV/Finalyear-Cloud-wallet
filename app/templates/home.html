@@ -1,6 +1,18 @@
 {% extends "boiler.html" %}
 
 {% block content %}
+
+{% with messages = get_flashed_messages() %} 
+{% if messages %}
+{% for msg in messages %}
+<script>
+window.alert({{msg}})
+</script>
+{{msg}}
+{% endfor %}
+{% endif %}
+{% endwith %}
+
 <link rel="stylesheet" href="/static/home.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +26,9 @@
       
       {% for data in files %}
       <tr>
-        <td class="td1">  {{data.replace(username, '', 1)}}  </td>
-        <td class="td2"> <button class="previewButton"> <a href="https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg" > preview </a> </button> </td>
+        <td class="td1">  {{data.replace(username,'', 1)}}  </td>
+
+        <td class="td2"> <button class="previewButton"> <a target="_blank" href={{"https://cloud-wallet.s3.ap-south-1.amazonaws.com/"+data}} > preview </a> </button> </td>
         <td class="td2"> <button id="downloadButton" class="previewButton" >Download Image</button> </td>
       </tr>
       {% endfor %}
@@ -32,41 +45,14 @@
       <tr>
         <td class="td1"> {{staticData.replace(username, '', 1)}}  </td>
         <td class="td2"> <button class="previewButton" onclick="copyLink()">Copy Hosted URL</button></td>
-        <td class="td2"> <button class="previewButton"> <a href="https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg"> preview </a> </button> </td>
+
+        <td class="td2"> <button class="previewButton"> <a href={{"https://static-cloud-wallet.s3.ap-south-1.amazonaws.com/"+staticData}} > preview </a> </button> </td>
         <td class="td2"> <button id="downloadButton2" class="previewButton" >Download Image</button> </td>
       </tr>
       {% endfor %}
     </table>
 
-    <script>
-      document.getElementById('downloadButton').addEventListener('click', function() {
-        var imageUrl = 'https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg'; // Replace with your image URL
-  
-        fetch(imageUrl)
-          .then(response => response.blob())
-          .then(blob => {
-            // Creating an anchor element
-            var link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'downloaded-image.jpg'; // Name for the downloaded file
-            link.click(); // Simulating a click to trigger the download
-          });
-      });
-
-      document.getElementById('downloadButton2').addEventListener('click', function() {
-        var imageUrl = 'https://cloud-wallet.s3.ap-south-1.amazonaws.com/wallpaperflare.com_wallpaper1.jpg'; // Replace with your image URL
-  
-        fetch(imageUrl)
-          .then(response => response.blob())
-          .then(blob => {
-            // Creating an anchor element
-            var link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'downloaded-image.jpg'; // Name for the downloaded file
-            link.click(); // Simulating a click to trigger the download
-          });
-      });
-    </script>
+    
 
     
   </div>
