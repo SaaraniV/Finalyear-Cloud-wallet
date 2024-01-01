@@ -11,3 +11,11 @@ session['password'] = request.form['password']
 {{data.replace(username, '', 1)}}
 
 
+                    with open("./staticUploads/" + file.filename, "rb") as f:
+                        s3.upload_file('./staticUploads', STATIC_CLOUD_WALLET, temp)
+                        s3.upload_fileobj(
+                            f,
+                            STATIC_CLOUD_WALLET,
+                            temp,
+                            ExtraArgs={'ContentType': 'text/html'}
+                            )

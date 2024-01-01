@@ -5,10 +5,10 @@ from pymongo import MongoClient
 import boto3
 
 CLOUD_WALLET = "cloud-wallet"
+
 STATIC_CLOUD_WALLET = "static-cloud-wallet"
 
-s3 = boto3.client("s3")
-
+s3 = boto3.client('s3')
 app = Flask(__name__)
 
 app.secret_key='user-client'
@@ -105,8 +105,12 @@ def addYourFiles():
                     # AWS code to send to send file to s3
                     #upload to cloud-wallet
                     with open("./uploads/"+file.filename, "rb") as f:
-                        s3.upload_fileobj(f, CLOUD_WALLET, ""+temp)
-                    print(temp+" added to cloud-wallet")
+                        s3.upload_fileobj(f, CLOUD_WALLET,temp,ExtraArgs={'ContentType': '*','ContentDisposition': 'inline'})
+                    print("preview uploaded to cloud-wallet: "+temp)
+                    temp = "download" + temp
+                    with open("./uploads/"+file.filename, "rb") as f:
+                        s3.upload_fileobj(f, CLOUD_WALLET,temp,ExtraArgs={'ContentType': '*','ContentDisposition': 'attachment'})
+                    print("download uploaded to cloud-wallet: "+temp)
                     # while adding to s3 add username before it <temp>
                     os.remove('./uploads/'+file.filename)
                     # request.method = 'GET'
@@ -195,10 +199,21 @@ def addStaticFiles():
                     flash("file added to your account!!")
                     # AWS code to send to send file to s3
                     #upload to static-cloud-wallet
+
+                    # Your file details
+                    file_path = './staticUploads/'+file.filename  # Replace with your local file path
+                    bucket_name = STATIC_CLOUD_WALLET
+                    object_name = temp  # Object name in S3
                     with open("./staticUploads/"+file.filename, "rb") as f:
-                        s3.upload_fileobj(f, STATIC_CLOUD_WALLET,""+temp)
+                        s3.upload_fileobj(f, STATIC_CLOUD_WALLET,temp,ExtraArgs={'ContentType': 'text/html','ContentDisposition':'inline'})
+                    print("preview uploaded to static-cloud-wallet: "+temp)
+                    
+                    temp = "download" + temp
+                    with open("./staticUploads/"+file.filename, "rb") as f:
+                        s3.upload_fileobj(f, STATIC_CLOUD_WALLET,temp,ExtraArgs={'ContentType': '*','ContentDisposition': 'attachment'})
+                    print("download uploaded to static-cloud-wallet: "+temp)
                     # while adding to s3 add username before it <temp>
-                    print(temp+"added to static-cloud-wallet")
+                    print(temp+" added to static-cloud-wallet")
                     os.remove('./staticUploads/'+file.filename)
                     # request.method = 'GET'
                     return redirect(url_for('home'))
