@@ -6,7 +6,7 @@ import boto3
 
 CLOUD_WALLET = "cloudwallet-myfiles"
 
-STATIC_CLOUD_WALLET = "cloudwallet-myfiles"
+STATIC_CLOUD_WALLET = "cloudwallet-mystaticfiles"
 
 s3 = boto3.client('s3')
 app = Flask(__name__)
