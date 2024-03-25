@@ -252,10 +252,14 @@ def signout():
         return redirect(url_for('index'))
     return redirect(url_for('index'))
 
-    
+@app.route("/content",methods=['POST','GET'])
+def content():
+    username=session['username']
+    return render_template('content.html',username=username)
+
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
 
     # add aws code 
     # when displaying code to frontend remove username from it

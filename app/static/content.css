@@ -1,0 +1,48 @@
+body{
+    background: url('/static/bgimg2.jpg') center/cover no-repeat fixed;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+.container{
+    display: flex;
+    height: 100%;
+    /* width: 70%; */
+    align-items: center;
+    justify-content: center;
+    overflow-y:visible;
+    margin: 0 20px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    color:white;
+    background: rgba(0, 0, 0, 0.41);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+}
+span{
+    display: inline;
+    font-weight: bold;
+    color: rgb(0, 31, 204);
+}
+p{
+    text-align: justify; line-height: 1.5;
+    font-size:medium;
+}
+.leftCont{
+    width: 60%;
+    color: black;
+    padding: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content:baseline;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+
+
